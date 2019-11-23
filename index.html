@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Piano Reeves</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Calistoga|Roboto+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+<section class="section">
+  <h1>Piano Reeves_</h1>
+  <p>By Justin Irabor. Based on Wes Bos' <a href="https://javascript30.com/">30 Days of <br> JavaScript challenges/lessons.</a> <br> Best viewed on a computer.</p>
+</section>
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">I'm</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">Sorry</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">My</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">Existence</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">Is</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">Not</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">Noble</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">Or</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">Sublime</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/Piano11.mp3"></audio>
+  <audio data-key="83" src="sounds/Piano12.mp3"></audio>
+  <audio data-key="68" src="sounds/Piano13.mp3"></audio>
+  <audio data-key="70" src="sounds/Piano14.mp3"></audio>
+  <audio data-key="71" src="sounds/Piano15.mp3"></audio>
+  <audio data-key="72" src="sounds/Piano16.mp3"></audio>
+  <audio data-key="74" src="sounds/Piano17.mp3"></audio>
+  <audio data-key="75" src="sounds/Piano18.mp3"></audio>
+  <audio data-key="76" src="sounds/Piano19.mp3"></audio>
+
+<script>
+  window.addEventListener('keydown', function(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    // console.log(audio);
+    if(!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+    key.classList.add('playing');
+  });
+  function removeTransition(e){
+    // console.log(e);
+    if(e.propertyName!=='transform'){return};
+    console.log(e.propertyName);
+    this.classList.remove('playing');
+  }
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key=>{
+    key.addEventListener('transitionend', removeTransition)
+  })
+</script>
+
+
+</body>
+</html>
